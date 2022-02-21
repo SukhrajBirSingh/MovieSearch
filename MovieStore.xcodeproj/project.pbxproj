@@ -17,6 +17,12 @@
 		8445943B2796518F007C9F1B /* MovieStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445943A2796518F007C9F1B /* MovieStoreUITests.swift */; };
 		8445943D2796518F007C9F1B /* MovieStoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445943C2796518F007C9F1B /* MovieStoreUITestsLaunchTests.swift */; };
 		8445944A2796606C007C9F1B /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844594492796606C007C9F1B /* MovieCollectionViewCell.swift */; };
+		8473519027C17E1100062FE6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473518F27C17E1100062FE6 /* NetworkService.swift */; };
+		8473519227C17F6900062FE6 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473519127C17F6900062FE6 /* Route.swift */; };
+		8473519427C1826300062FE6 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473519327C1826300062FE6 /* Method.swift */; };
+		8473519727C1841C00062FE6 /* StringtoURL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473519627C1841C00062FE6 /* StringtoURL+Extension.swift */; };
+		8473519927C187E500062FE6 /* AppErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473519827C187E500062FE6 /* AppErrors.swift */; };
+		8473519B27C18B1900062FE6 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473519A27C18B1900062FE6 /* ApiResponse.swift */; };
 		84B0F63727B0441300CE92FC /* MovieResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F63627B0441300CE92FC /* MovieResult.swift */; };
 		84B0F63B27B05C5900CE92FC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F63A27B05C5900CE92FC /* SearchViewController.swift */; };
 		84B0F63D27B05D2500CE92FC /* MovieDetialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F63C27B05D2500CE92FC /* MovieDetialViewController.swift */; };
@@ -54,6 +60,12 @@
 		8445943A2796518F007C9F1B /* MovieStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStoreUITests.swift; sourceTree = "<group>"; };
 		8445943C2796518F007C9F1B /* MovieStoreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStoreUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		844594492796606C007C9F1B /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		8473518F27C17E1100062FE6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8473519127C17F6900062FE6 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		8473519327C1826300062FE6 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		8473519627C1841C00062FE6 /* StringtoURL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringtoURL+Extension.swift"; sourceTree = "<group>"; };
+		8473519827C187E500062FE6 /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
+		8473519A27C18B1900062FE6 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		84B0F63627B0441300CE92FC /* MovieResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResult.swift; sourceTree = "<group>"; };
 		84B0F63A27B05C5900CE92FC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		84B0F63C27B05D2500CE92FC /* MovieDetialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetialViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +119,8 @@
 		8445941827965188007C9F1B /* MovieStore */ = {
 			isa = PBXGroup;
 			children = (
+				8473519527C183EC00062FE6 /* Extension */,
+				8473518E27C17DE900062FE6 /* Networking */,
 				8445941927965188007C9F1B /* AppDelegate.swift */,
 				8445941B27965188007C9F1B /* SceneDelegate.swift */,
 				84B0F63427B0408100CE92FC /* Model */,
@@ -134,6 +148,26 @@
 				8445943C2796518F007C9F1B /* MovieStoreUITestsLaunchTests.swift */,
 			);
 			path = MovieStoreUITests;
+			sourceTree = "<group>";
+		};
+		8473518E27C17DE900062FE6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8473518F27C17E1100062FE6 /* NetworkService.swift */,
+				8473519127C17F6900062FE6 /* Route.swift */,
+				8473519327C1826300062FE6 /* Method.swift */,
+				8473519827C187E500062FE6 /* AppErrors.swift */,
+				8473519A27C18B1900062FE6 /* ApiResponse.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8473519527C183EC00062FE6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8473519627C1841C00062FE6 /* StringtoURL+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		84B0F63327B0407100CE92FC /* View */ = {
@@ -294,8 +328,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8473519927C187E500062FE6 /* AppErrors.swift in Sources */,
+				8473519427C1826300062FE6 /* Method.swift in Sources */,
+				8473519227C17F6900062FE6 /* Route.swift in Sources */,
 				8445941E27965188007C9F1B /* MovieViewController.swift in Sources */,
 				84B0F63B27B05C5900CE92FC /* SearchViewController.swift in Sources */,
+				8473519B27C18B1900062FE6 /* ApiResponse.swift in Sources */,
+				8473519727C1841C00062FE6 /* StringtoURL+Extension.swift in Sources */,
+				8473519027C17E1100062FE6 /* NetworkService.swift in Sources */,
 				8445941A27965188007C9F1B /* AppDelegate.swift in Sources */,
 				8445941C27965188007C9F1B /* SceneDelegate.swift in Sources */,
 				84B0F63D27B05D2500CE92FC /* MovieDetialViewController.swift in Sources */,

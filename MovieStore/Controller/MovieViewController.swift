@@ -9,17 +9,9 @@ import UIKit
 
 class MovieViewController: UIViewController {
 
-
     var movies = [Movie]()
     var searchedMovie : String?
     
-    func searched (text : String?){
-      searchMovies(search: text)
-    }
-    
-    
-    
-
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var SearchBarView: UISearchBar!
@@ -30,21 +22,35 @@ class MovieViewController: UIViewController {
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         SearchBarView.delegate = self
-        self.view.backgroundColor = UIColor.gray
-        collectionView.backgroundColor = UIColor.gray
+        self.view.backgroundColor = UIColor.systemGray6
+        collectionView.backgroundColor = UIColor.systemGray6
         SearchBarView.barTintColor = UIColor.gray
         SearchBarView.searchTextField.backgroundColor = UIColor.white
         SearchBarView.searchBarStyle = .minimal
         
+
         SearchBarView.text = searchedMovie
+      
     
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NetworkService.shared.fetchMovies(search: searchedMovie!) { (result) in
+            switch result {
+                
+            case .success(let movies):
+                if let newMovies = movies.Search{
+                    self.movies.append(contentsOf: newMovies)
+                    self.collectionView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         
-        // Do any additional setup after loading the view.
     }
 
 
@@ -68,8 +74,11 @@ extension MovieViewController : UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToMovieDetail", sender: self)
-    }
+       performSegue(withIdentifier: "goToMovieDetail", sender: self)
+        
+        }
+        
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MovieDetialViewController
@@ -83,74 +92,65 @@ extension MovieViewController : UICollectionViewDataSource{
 
 extension MovieViewController : UISearchBarDelegate {
     
-    func searchMovies(search : String?) {
-        DispatchQueue.main.async {
-            self.collectionView.resignFirstResponder()
-
-        }
-
-
-        guard let text = search, !text .isEmpty else {
-            return
-        }
-
-        let quary = text.replacingOccurrences(of: " ", with: "%20")
-
-        movies.removeAll()
-
-        URLSession.shared.dataTask(with: URL(string: "https://www.omdbapi.com/?s=\(quary)&apikey=("YOUR_API_KEY")")!,
-             completionHandler: { data, response, error in
-
-            guard let data = data, error == nil else {
-
-                return
-            }
-
-            //convert
-            var result: MovieResult?
-            do {
-
-                result = try JSONDecoder().decode(MovieResult.self, from: data)
-
-
-            }catch{
-                print ("movie not found! error")
-               self.searchMovies(search: quary.components(separatedBy:"%20").first)
-                return
-
-            }
-
-            guard let finalResult = result else{
-                return
-            }
-
-            //update movie array
-           let newMovies = finalResult.Search
-            self.movies.append(contentsOf: newMovies)
-
-
-            //refresh our table
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-
-            }
-
-        }).resume()
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-       
-        searchMovies(search:SearchBarView.text!)
+    let search =  SearchBarView.text
+
+    guard let text = search, !text .isEmpty else {
+                    return
+                }
         
-       // searchMovies(search: SearchBarView.text)
+    let quary = text.replacingOccurrences(of: " ", with: "%20")
+        
+
+//                DispatchQueue.main.async {
+//                self.collectionView.resignFirstResponder()
+//    }
+        movies.removeAll()
+        
+        NetworkService.shared.fetchMovies(search: quary) { (result) in
+            switch result {
+                
+            case .success(let movies):
+                if let foundMovies = movies.Search{
+                    self.movies.append(contentsOf: foundMovies)
+                    self.collectionView.reloadData()
+                }
+                else
+                 {
+                    if (quary.components(separatedBy: "%20").count >= 2 )  {
+                        
+                        let newQuary = quary.components(separatedBy: "%20").first
+                        NetworkService.shared.fetchMovies(search: newQuary!) { (result) in
+                            switch result {
+                                
+                            case .success(let movies):
+                                if let newMovies = movies.Search{
+                                    self.movies.append(contentsOf: newMovies)
+                                    self.collectionView.reloadData()
+                                } else {
+                                    print ("movie still not found!")
+                                }
+                                
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                     else {
+                        print ("movie not found")
+                    }
+                   
+                    
+                }
+               
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-    }
-    
-    
+  
 }
 
 extension MovieViewController : UICollectionViewDelegateFlowLayout {

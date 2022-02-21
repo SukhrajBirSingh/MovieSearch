@@ -8,7 +8,10 @@
 import Foundation
 
 struct MovieResult : Codable{
-    let Search : [Movie]
+    let Search : [Movie]?
+    let Response : String?
+    let Error : String?
+  
 }
 
 struct Movie: Codable{

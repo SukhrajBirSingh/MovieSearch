@@ -76,7 +76,7 @@ extension SearchViewController : UITextFieldDelegate{
         if segue.identifier == "goToMovieView" {
             let destinationVC = segue.destination as! MovieViewController
             destinationVC.searchedMovie = searchTextField.text
-            destinationVC.searched(text: searchTextField.text)
+            //destinationVC.searched(text: searchTextField.text)
            // destinationVC.movies =
         }
     }
